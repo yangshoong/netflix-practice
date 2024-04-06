@@ -1,0 +1,13 @@
+.page-bg-body {
+  background-color: black;
+  min-height: 100vh;
+  /* 뷰포트 높이의 100% */
+  width: 100%;
+  /* 너비를 100%로 설정 */
+  margin: 0;
+  /* 마진 제거 */
+  padding: 0;
+  /* 패딩 제거 */
+  color: white;
+  /* 글자색을 흰색으로 설정 */
+}

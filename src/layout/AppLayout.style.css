@@ -1,0 +1,55 @@
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* 네비게이션 바의 배경과 글자색을 설정합니다 */
+.bg-body-tertiary {
+  background-color: black !important;
+  /* 배경색을 검은색으로 설정 */
+  color: #fff !important;
+  /* 모든 글자색을 흰색으로 설정 */
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  /* 네비게이션 링크의 글자색을 흰색으로 설정 */
+}
+
+/* 네비게이션 바 토글 버튼(햄버거 아이콘)의 색상을 변경합니다 */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Search 버튼의 기본 스타일 */
+.btn-outline-success {
+  color: #dc3545;
+  /* 글자색을 붉은색으로 설정 */
+  background-color: #000;
+  /* 내부색을 검은색으로 설정 */
+  border-color: #dc3545;
+  /* 외곽선 색을 붉은색으로 설정 */
+}
+
+/* Search 버튼에 마우스를 올렸을 때의 스타일 */
+.btn-outline-success:hover {
+  color: #fff;
+  /* 호버 상태에서 글자색을 흰색으로 변경 */
+  background-color: #d16570;
+  /* 호버 상태에서 내부색을 연한 붉은색으로 변경 */
+  border-color: #dc3545;
+  /* 호버 상태에서 외곽선 색을 붉은색으로 유지 */
+}
+
+/* Search 버튼에 포커스 되었을 때 (클릭하고 있는 상태)의 스타일 */
+.btn-outline-success:focus,
+.btn-outline-success:active {
+  color: #fff;
+  /* 포커스 상태에서 글자색을 흰색으로 유지 */
+  background-color: #ca5762;
+  /* 포커스 상태에서 내부색을 연한 붉은색으로 유지 */
+  border-color: #dc3545;
+  /* 포커스 상태에서 외곽선 색을 붉은색으로 유지 */
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+  /* 붉은색 그림자 효과 */
+}
