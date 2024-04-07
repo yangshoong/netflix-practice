@@ -17,7 +17,7 @@ const AppLayout = () => {
           <Navbar.Brand href="/">
             <img
               src="https://about.netflix.com/images/logo.png"
-              height="40" // 원하는 높이로 설정하세요
+              height="40" 
               alt="Brand Logo"
             />
           </Navbar.Brand>
