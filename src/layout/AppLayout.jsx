@@ -16,8 +16,8 @@ const AppLayout = () => {
         <Container fluid>
           <Navbar.Brand href="/">
             <img
-              src="https://about.netflix.com/images/logo.png"
-              height="40" 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlN526MCwRaALpweyDh_MHmblVYbSEMLyE2oMAl3QyiA&s"
+              height="40"
               alt="Brand Logo"
             />
           </Navbar.Brand>
