@@ -23,7 +23,6 @@ const Banner = () => {
     return <Alert variant="danger">Error: {error.message}</Alert>;
   }
 
-  // ...
 
   return (
     <div
