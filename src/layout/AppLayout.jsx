@@ -8,6 +8,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AppLayout.style.css";
+import logo from "../assets/img/logo.png";
 
 const AppLayout = () => {
   return (
@@ -15,11 +16,7 @@ const AppLayout = () => {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
           <Navbar.Brand href="/">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlN526MCwRaALpweyDh_MHmblVYbSEMLyE2oMAl3QyiA&s"
-              height="40"
-              alt="Brand Logo"
-            />
+            <img src={logo} height="40" alt="Brand Logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
