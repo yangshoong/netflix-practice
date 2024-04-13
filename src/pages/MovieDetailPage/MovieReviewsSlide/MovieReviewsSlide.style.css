@@ -1,0 +1,10 @@
+/* Custom styles for Accordion */
+.custom-accordion .accordion-header {
+  background-color: black;
+  color: white;
+}
+
+.custom-accordion .accordion-body {
+  background-color: black;
+  color: white;
+}
