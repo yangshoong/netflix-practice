@@ -13,7 +13,7 @@ import Badge from "react-bootstrap/Badge";
 import "./MoviesPage.style.css";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useSearchParams();
+  const [query] = useSearchParams();
   const [page, setPage] = useState(1);
   const keyword = query.get("q");
   const { data, isLoading, isError, error } = useSearchMovieQuery({
