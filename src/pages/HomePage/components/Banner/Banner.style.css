@@ -1,5 +1,5 @@
 .banner{
-  height: 46vh;
+  height: 80vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size : cover;
@@ -11,7 +11,7 @@
   background: linear-gradient(to top, black,transparent);
   position:absolute;
   left:0;
-  height:46vh;
+  height:80vh;
   width:100%;
 
 }

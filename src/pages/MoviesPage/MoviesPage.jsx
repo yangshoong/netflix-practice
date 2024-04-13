@@ -9,13 +9,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
+import Dropdown from "react-bootstrap/Dropdown";
+import Badge from "react-bootstrap/Badge";
 
 const MoviesPage = () => {
   const [query, setQuery] = useSearchParams();
   const [page, setPage] = useState(1);
   const keyword = query.get("q");
   const { data, isLoading, isError, error } = useSearchMovieQuery({
-    keyword, page
+    keyword,
+    page,
   });
   console.log("sss", data);
 
@@ -23,6 +26,28 @@ const MoviesPage = () => {
     console.log("page", page);
     setPage(selected + 1);
   };
+
+  const genres = [
+    "SF",
+    "TV 영화",
+    "가족",
+    "공포",
+    "다큐멘터리",
+    "드라마",
+    "로맨스",
+    "모험",
+    "미스터리",
+    "범죄",
+    "서부",
+    "스릴러",
+    "애니메이션",
+    "액션",
+    "역사",
+    "음악",
+    "전쟁",
+    "코미디",
+    "판타지",
+  ];
 
   if (isLoading) {
     return (
@@ -43,13 +68,45 @@ const MoviesPage = () => {
     <div className="page-bg-body">
       <Container>
         <Row>
-          <Col lg={4} xs={12}>
-            {" "}
-            필터{" "}
+          <Col lg={3} xs={12}>
+            <h3>인기영화</h3>
+            <Row className="spacer-row"></Row>
+            <Row>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  정렬
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">인기도순</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">평점순</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">상영일순</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Row>
+            <Row className="spacer-row"></Row>
+            <Row className="spacer-row"></Row>
+            <Row>
+              <Col lg={12} xs={12}>
+                <h5>장르</h5>
+                <Row>
+                  {genres.map((genre, index) => (
+                    <Col key={index} className="mb-3">
+                      <Badge
+                        pill
+                        bg="light"
+                        text="dark"
+                        className="genre-badge"
+                      >
+                        {genre}
+                      </Badge>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
           </Col>
+          <Col lg={1} xs={1}></Col>
           <Col lg={8} xs={12}>
-            {" "}
-            영화 카드{" "}
             <Row>
               {data.results?.map((movie, index) => (
                 <Col key={index} lg={4} xs={12}>
@@ -76,7 +133,7 @@ const MoviesPage = () => {
               containerClassName="pagination"
               activeClassName="active"
               renderOnZeroPageCount={null}
-              forcePage={page-1}
+              forcePage={page - 1}
             />
           </Col>
         </Row>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import "./MovieCard.style.css";
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
@@ -10,8 +10,12 @@ const MovieCard = ({ movie }) => {
     if (!genreData) return [];
     return genreIdList.map((id) => {
       const genreObj = genreData.find((genre) => genre.id === id);
-      return genreObj ? genreObj.name : "Unknown"; 
+      return genreObj ? genreObj.name : "Unknown";
     });
+  };
+  const [modalShow, setModalShow] = useState(false);
+  const handleCardClick = () => {
+    setModalShow(true); // Show the modal
   };
 
   return (
@@ -20,6 +24,7 @@ const MovieCard = ({ movie }) => {
         backgroundImage: `url(https://media.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path})`,
       }}
       className="movie-card"
+      onClick={handleCardClick}
     >
       <div className="overlay">
         <div className="movie-card-content">
@@ -37,6 +42,7 @@ const MovieCard = ({ movie }) => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
