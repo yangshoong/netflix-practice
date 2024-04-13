@@ -12,6 +12,9 @@ import Modal from "react-bootstrap/Modal";
 import "./MovieDetailPage.style.css";
 import { useParams } from "react-router-dom";
 import YouTube, { YouTubeProps } from "react-youtube";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import RecommendedMovieSlide from "./RecommendedMovieSlide/RecommendedMovieSlide";
 
 const MovieDetailPage = () => {
   // useMovieGenreQuery를 실행시켜서 받은 data를 genreData라는 이름의 변수에 담아 사용한다.
@@ -32,10 +35,8 @@ const MovieDetailPage = () => {
     : defaultPosterUrl;
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
@@ -113,12 +114,21 @@ const MovieDetailPage = () => {
             </Row>
             <h3 className="row-spacer">Overview</h3>
             <Row>{data.overview}</Row>
-            <Row className="row-spacer">
-              <h3>Reviews</h3>
-              <Row> </Row>
-            </Row>
+            <Row className="row-spacer"></Row>
           </Col>
         </Row>
+        <Tabs
+          defaultActiveKey="profile"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="Review" title="Review">
+            Reviews
+          </Tab>
+          <Tab eventKey="Recommended Movies" title="Recommended Movies">
+            <RecommendedMovieSlide id={id} />
+          </Tab>
+        </Tabs>
       </Container>
     </div>
   );
