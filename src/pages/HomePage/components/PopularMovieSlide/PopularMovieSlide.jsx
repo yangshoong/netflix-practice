@@ -5,24 +5,11 @@ import Spinner from "react-bootstrap/Spinner";
 import "react-multi-carousel/lib/styles.css";
 import './PopularMovieSlide.style.css';
 import MovieSlider from "../../../../common/MovieSlider/MovieSlider";
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 6,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
+import {responsive} from "../../../../constants/responsive";
 
 const PopularMovieSlide = () => {
   const { data, isLoading, isError, error } = usePopularMoviesQuery();
+  //usePopularMoviesQuery 를 실행시켜서 api를 작동시켜 result.data를 받아온다.
 
   if (isLoading) {
     return (
@@ -46,6 +33,7 @@ const PopularMovieSlide = () => {
         movies={data.results}
         responsive={responsive}
       />
+      {/* MovieSlider를 작동시키면서 title명, movies의 값으로 data.result를, responsive 상수값을 받아와서 responsive로 props를 넘겨준다. */}
     </div>
   );
 };

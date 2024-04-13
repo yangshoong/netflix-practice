@@ -16,7 +16,8 @@ const HomePage = () => {
       <TopRatedMovieSlide />
       <UpcomingMovieSlide />
     </div>
-  );
+  ); 
+  // Banner, now playing, Popular, Top rate, Upcoming 컴포넌트를 실행시킨다. 
   
 }
 

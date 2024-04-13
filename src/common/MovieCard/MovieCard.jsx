@@ -4,6 +4,7 @@ import "./MovieCard.style.css";
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 
 const MovieCard = ({ movie }) => {
+  // MovieCard로 props를 전달할때 movie, index 두가지를 넘겨 주었는데, 이중 index는 부모컴포넌트에서 활용이 되며, MovieCard는 자신이 필요로 하는 movie만을 받아서 렌더링이 사용한다.
   const { data: genreData } = useMovieGenreQuery();
 
   const showGenre = (genreIdList) => {

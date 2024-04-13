@@ -5,21 +5,8 @@ import Spinner from "react-bootstrap/Spinner";
 import "react-multi-carousel/lib/styles.css";
 import "./RecommendedMovieSlide.style.css";
 import MovieSlider from "../../../../common/MovieSlider/MovieSlider";
+import { responsive } from "../../../../constants/responsive";
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 6,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
 
 const RecommendedMovieSlide = () => {
   const { data, isLoading, isError, error } = useRecommendedMoviesQuery();
