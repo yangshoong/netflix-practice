@@ -1,15 +1,15 @@
 import React from "react";
-import { useRecommendedMoviesQuery } from "../../../../hooks/useRecommendedMovies";
+import { useNowPlayingMoviesQuery } from "../../../../hooks/useNowPlayingMovies";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import "react-multi-carousel/lib/styles.css";
-import "./RecommendedMovieSlide.style.css";
+import "./NowPlayingMovieSlide.style.css";
 import MovieSlider from "../../../../common/MovieSlider/MovieSlider";
 import { responsive } from "../../../../constants/responsive";
 
 
-const RecommendedMovieSlide = () => {
-  const { data, isLoading, isError, error } = useRecommendedMoviesQuery();
+const NowPlayingMovieSlide = () => {
+  const { data, isLoading, isError, error } = useNowPlayingMoviesQuery();
 
   if (isLoading) {
     return (
@@ -37,4 +37,4 @@ const RecommendedMovieSlide = () => {
   );
 };
 
-export default RecommendedMovieSlide;
+export default NowPlayingMovieSlide;

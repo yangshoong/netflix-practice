@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./MoviesPage.style.css";
 import { useSearchMovieQuery } from "../../hooks/useSerarchMovie";
 import { useSearchParams } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
@@ -11,6 +10,7 @@ import MovieCard from "../../common/MovieCard/MovieCard";
 import ReactPaginate from "react-paginate";
 import Dropdown from "react-bootstrap/Dropdown";
 import Badge from "react-bootstrap/Badge";
+import "./MoviesPage.style.css";
 
 const MoviesPage = () => {
   const [query, setQuery] = useSearchParams();
@@ -29,24 +29,24 @@ const MoviesPage = () => {
 
   const genres = [
     "SF",
-    "TV 영화",
-    "가족",
-    "공포",
-    "다큐멘터리",
-    "드라마",
-    "로맨스",
-    "모험",
-    "미스터리",
-    "범죄",
-    "서부",
-    "스릴러",
-    "애니메이션",
-    "액션",
-    "역사",
-    "음악",
-    "전쟁",
-    "코미디",
-    "판타지",
+    "TV Movie",
+    "Family",
+    "Horror",
+    "Documentary",
+    "Drama",
+    "Romance",
+    "Adventure",
+    "Mystery",
+    "Crime",
+    "Western",
+    "Thriller",
+    "Animation",
+    "Action",
+    "History",
+    "Music",
+    "War",
+    "Comedy",
+    "Fantasy",
   ];
 
   if (isLoading) {
@@ -69,17 +69,17 @@ const MoviesPage = () => {
       <Container>
         <Row>
           <Col lg={3} xs={12}>
-            <h3>인기영화</h3>
+            <h3>Movies</h3>
             <Row className="spacer-row"></Row>
             <Row>
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  정렬
+                  Sort
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">인기도순</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">평점순</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">상영일순</Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">Popularity </Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Vote Average</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Release Date</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Row>
@@ -87,7 +87,7 @@ const MoviesPage = () => {
             <Row className="spacer-row"></Row>
             <Row>
               <Col lg={12} xs={12}>
-                <h5>장르</h5>
+                <h5>Genres</h5>
                 <Row>
                   {genres.map((genre, index) => (
                     <Col key={index} className="mb-3">

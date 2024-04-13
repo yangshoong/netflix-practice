@@ -1,14 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import api from "../utils/api";
+import { useQuery } from '@tanstack/react-query';
+import api from '../utils/api';
 
-const fetchRecommendedMovies = () => {
-  return api.get("/movie/now_playing");
+const fetchRecommendedMovies = ({ id }) => {
+  return api.get(`/movie/${id}/recommendations`);
 };
 
-export const useRecommendedMoviesQuery = () => {
+export const useRecommendedMoviesQuery = ({ id }) => {
   return useQuery({
-    queryKey: ['movie-recommended'],
-    queryFn: fetchRecommendedMovies,
-    select: (result) => result.data,
+    queryKey: ['movie-recommend', id],
+    queryFn: () => fetchRecommendedMovies({ id }),
+    select: (result) => result.data.results,
   });
 };

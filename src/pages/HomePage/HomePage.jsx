@@ -4,14 +4,14 @@ import "./HomePage.style.css";
 import PopularMovieSlide from './components/PopularMovieSlide/PopularMovieSlide';
 import TopRatedMovieSlide from "./components/TopRatedMovieSlide/TopRatedMovieSlide";
 import UpcomingMovieSlide from "./components/UpcomingMovieSlide/UpcomingMovieSlide";
-import RecommendedMovieSlide from "./components/RecommendedMovieSlide/RecommendedMovieSlide";
+import NowPlayingMovieSlide from "./components/NowPlayingMovieSlide/NowPlayingMovieSlide";
 
 
 const HomePage = () => {
   return (
     <div className="page-bg-body">
       <Banner />
-      <RecommendedMovieSlide />
+      <NowPlayingMovieSlide />
       <PopularMovieSlide />
       <TopRatedMovieSlide />
       <UpcomingMovieSlide />

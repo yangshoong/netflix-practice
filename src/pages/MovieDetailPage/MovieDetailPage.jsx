@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMovieDetailsQuery } from "../../hooks/useMovieDetails";
+import { useMovieReviewsQuery } from "../../hooks/useMovieReviews";
+import { useMovieVideosQuery } from "../../hooks/useMovieVideos";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import "./MovieDetailPage.style.css";
 import { useParams } from "react-router-dom";
+import YouTube, { YouTubeProps } from "react-youtube";
 
 const MovieDetailPage = () => {
   // useMovieGenreQuery를 실행시켜서 받은 data를 genreData라는 이름의 변수에 담아 사용한다.
@@ -14,7 +19,37 @@ const MovieDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading, isError, error } = useMovieDetailsQuery({ id });
   console.log("detail", data);
-  
+  const { reviewsData } = useMovieReviewsQuery({ id });
+  console.log("reviews", reviewsData);
+  const { videosData } = useMovieVideosQuery({ id });
+  console.log("youtube", videosData);
+
+  const defaultPosterUrl = "https://via.placeholder.com/600x900?text=No+Poster";
+  const posterUrl = data
+    ? data.poster_path
+      ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${data.poster_path}`
+      : defaultPosterUrl
+    : defaultPosterUrl;
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  };
+
+  const opts: YouTubeProps["opts"] = {
+    height: "240",
+    width: "100%",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -30,15 +65,9 @@ const MovieDetailPage = () => {
     return <Alert variant="danger">Error: {error.message}</Alert>;
   }
 
-  // data가 있을 때만 렌더링하도록 수정
   if (!data) {
-    return null; // 또는 로딩 상태를 렌더링할 수 있습니다.
+    return null;
   }
-
-  const defaultPosterUrl = "https://via.placeholder.com/600x900?text=No+Poster";
-  const posterUrl = data.poster_path
-    ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${data.poster_path}`
-    : defaultPosterUrl;
 
   return (
     <div className="page-bg-body">
@@ -51,18 +80,43 @@ const MovieDetailPage = () => {
           </Col>
           <Col>
             <h1>{data.title}</h1>
+            <h3>{data.tagline}</h3>
             <Row className="row-spacer">
-              <div>개봉일 : {data.release_date}</div>
-              <div>점수 : {data.popularity}</div>
-              <div>평점 : {data.vote_average}</div>
-              <div>등급 : {data.adult ? "over 18" : "under 18"}</div>
+              <div>Release Date : {data.release_date}</div>
+              <div>Popularity : {data.popularity}</div>
+              <div>Vote Average : {data.vote_average}</div>
+              <div>Adult : {data.adult ? "over 18" : "under 18"}</div>
+              <div>Runtime : {data.runtime}</div>
+              <div>
+                Revenue :{" "}
+                {data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </div>
             </Row>
+            <Row className="row-spacer"></Row>
+            <Row>
+              <Button variant="secondary" onClick={handleShow}>
+                Trailer
+              </Button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Trailer</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <YouTube
+                    videoId="2g811Eo7K8U"
+                    opts={opts}
+                    onReady={onPlayerReady}
+                  />
+                </Modal.Body>
+                <Modal.Footer></Modal.Footer>
+              </Modal>
+            </Row>
+            <h3 className="row-spacer">Overview</h3>
+            <Row>{data.overview}</Row>
             <Row className="row-spacer">
+              <h3>Reviews</h3>
+              <Row> </Row>
             </Row>
-            <Row className="row-spacer">트레일러 재생</Row>
-            <h3 className="row-spacer">개요</h3>
-            <Row>개요 내용</Row>
-            <Row className="row-spacer">리뷰</Row>
           </Col>
         </Row>
       </Container>
