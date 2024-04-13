@@ -1,21 +1,18 @@
 import React from "react";
-import { useRecommendedMoviesQuery } from "../../../hooks/useRecommendedMovies";
+import { useMovieReviewsQuery } from "../../../hooks/useMovieReviews";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import "react-multi-carousel/lib/styles.css";
-import "./RecommendedMovieSlide.style.css";
-import MovieSlider from "../../../common/MovieSlider/MovieSlider";
+import "./MovieReviewsSlide.style.css";
 import { useParams } from "react-router-dom";
-import { responsive } from "../../../constants/responsive";
 
 
-const RecommendedMovieSlide = () => {
+const MovieReviewsSlide = () => {
   const { id } = useParams();
-  const { data, isLoading, isError, error } = useRecommendedMoviesQuery({
+  const { data, isLoading, isError, error } = useMovieReviewsQuery({
     id,
   });
-  console.log("recommended", data);
-
+  console.log("reviews", data?.results);
 
   if (isLoading) {
     return (
@@ -34,12 +31,8 @@ const RecommendedMovieSlide = () => {
 
   return (
     <div>
-      <MovieSlider
-        movies={data.results}
-        responsive={responsive}
-      />
     </div>
   );
 };
 
-export default RecommendedMovieSlide;
+export default MovieReviewsSlide;

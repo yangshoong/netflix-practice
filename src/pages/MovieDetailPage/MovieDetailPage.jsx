@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useMovieDetailsQuery } from "../../hooks/useMovieDetails";
-import { useMovieReviewsQuery } from "../../hooks/useMovieReviews";
 import { useMovieVideosQuery } from "../../hooks/useMovieVideos";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
@@ -15,15 +14,15 @@ import YouTube, { YouTubeProps } from "react-youtube";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import RecommendedMovieSlide from "./RecommendedMovieSlide/RecommendedMovieSlide";
+import MovieReviewsSlide from "./MovieReviewsSlide/MovieReviewsSlide";
 
 const MovieDetailPage = () => {
   // useMovieGenreQuery를 실행시켜서 받은 data를 genreData라는 이름의 변수에 담아 사용한다.
 
   const { id } = useParams();
+  console.log('id', id);
   const { data, isLoading, isError, error } = useMovieDetailsQuery({ id });
   console.log("detail", data);
-  const { reviewsData } = useMovieReviewsQuery({ id });
-  console.log("reviews", reviewsData);
   const { videosData } = useMovieVideosQuery({ id });
   console.log("youtube", videosData);
 
@@ -122,11 +121,11 @@ const MovieDetailPage = () => {
           id="uncontrolled-tab-example"
           className="mb-3"
         >
-          <Tab eventKey="Review" title="Review">
-            Reviews
+          <Tab eventKey="Reviews" title="Reviews">
+            <MovieReviewsSlide />
           </Tab>
           <Tab eventKey="Recommended Movies" title="Recommended Movies">
-            <RecommendedMovieSlide id={id} />
+            <RecommendedMovieSlide />
           </Tab>
         </Tabs>
       </Container>
