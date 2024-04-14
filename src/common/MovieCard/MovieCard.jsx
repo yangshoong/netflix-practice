@@ -40,10 +40,10 @@ const MovieCard = ({ movie }) => {
           ))}
           {/* showGenre에 MovieCard에 props로 전달된 객체 중 movie.genre_ids를 전달한다. 이후 showGenre의 반환값 genreObj(영화의 장르와 일치하는 전체장르 id 배열)을 가지고 map을 돌리면서 genreName, index에 대한 작업을 수행하는데, 이때 작업은 badge에 각 index와 genreName을 입력하여 만드는 것이다.     */}
           <div>
-            <div>개봉일 : {movie.release_date}</div>
-            <div>점수 : {movie.popularity}</div>
-            <div>평점 : {movie.vote_average}</div>
-            <div>등급 : {movie.adult ? "over 18" : "under 18"}</div>
+            <div>Release Date : {movie.release_date}</div>
+            <div>Popularity : {movie.popularity}</div>
+            <div>Vote Average : {movie.vote_average}</div>
+            <div>Adult : {movie.adult ? "over 18" : "under 18"}</div>
           </div>
         </div>
       </div>

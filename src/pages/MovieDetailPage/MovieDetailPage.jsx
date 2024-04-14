@@ -1,30 +1,26 @@
 import React, { useState } from "react";
 import { useMovieDetailsQuery } from "../../hooks/useMovieDetails";
-import { useMovieVideosQuery } from "../../hooks/useMovieVideos";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import "./MovieDetailPage.style.css";
 import { useParams } from "react-router-dom";
-import YouTube, { YouTubeProps } from "react-youtube";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import RecommendedMovieSlide from "./RecommendedMovieSlide/RecommendedMovieSlide";
 import MovieReviewsSlide from "./MovieReviewsSlide/MovieReviewsSlide";
+import MovieTrailerModal from "./MovieTrailerModal/MovieTrailerModal";
 
 const MovieDetailPage = () => {
   // useMovieGenreQuery를 실행시켜서 받은 data를 genreData라는 이름의 변수에 담아 사용한다.
 
   const { id } = useParams();
-  console.log('id', id);
+  console.log("id", id);
   const { data, isLoading, isError, error } = useMovieDetailsQuery({ id });
   console.log("detail", data);
-  const { videosData } = useMovieVideosQuery({ id });
-  console.log("youtube", videosData);
 
   const defaultPosterUrl = "https://via.placeholder.com/600x900?text=No+Poster";
   const posterUrl = data
@@ -33,22 +29,10 @@ const MovieDetailPage = () => {
       : defaultPosterUrl
     : defaultPosterUrl;
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
+    const [show, setShow] = useState(false);
 
-  const opts: YouTubeProps["opts"] = {
-    height: "240",
-    width: "100%",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
   if (isLoading) {
     return (
@@ -97,19 +81,6 @@ const MovieDetailPage = () => {
               <Button variant="secondary" onClick={handleShow}>
                 Trailer
               </Button>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Trailer</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <YouTube
-                    videoId="2g811Eo7K8U"
-                    opts={opts}
-                    onReady={onPlayerReady}
-                  />
-                </Modal.Body>
-                <Modal.Footer></Modal.Footer>
-              </Modal>
             </Row>
             <h3 className="row-spacer">Overview</h3>
             <Row>{data.overview}</Row>
@@ -129,6 +100,7 @@ const MovieDetailPage = () => {
           </Tab>
         </Tabs>
       </Container>
+      <MovieTrailerModal show={show} handleClose={handleClose} />
     </div>
   );
 };
