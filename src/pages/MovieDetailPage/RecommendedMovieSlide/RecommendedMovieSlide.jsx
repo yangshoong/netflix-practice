@@ -3,7 +3,6 @@ import { useRecommendedMoviesQuery } from "../../../hooks/useRecommendedMovies";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import "react-multi-carousel/lib/styles.css";
-import "./RecommendedMovieSlide.style.css";
 import MovieSlider from "../../../common/MovieSlider/MovieSlider";
 import { useParams } from "react-router-dom";
 import { responsive } from "../../../constants/responsive";
