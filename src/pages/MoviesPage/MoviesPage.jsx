@@ -49,6 +49,24 @@ const MoviesPage = () => {
     "Fantasy",
   ];
 
+  const [sortBy, setSortBy] = useState("popularity");
+  const handleSort = (sortOption) => {
+    setSortBy(sortOption);
+  };
+
+  const sortedResults = data.results?.sort((a, b) => {
+    switch (sortBy) {
+      case "popularity":
+        return b.popularity - a.popularity;
+      case "voteAverage":
+        return b.vote_average - a.vote_average;
+      case "releaseDate":
+        return new Date(b.release_date) - new Date(a.release_date);
+      default:
+        return 0;
+    }
+  });
+
   if (isLoading) {
     return (
       <div>
@@ -77,9 +95,15 @@ const MoviesPage = () => {
                   Sort
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Popularity </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Vote Average</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Release Date</Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleSort("popularity")}>
+                    Popularity
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleSort("voteAverage")}>
+                    Vote Average
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => handleSort("releaseDate")}>
+                    Release Date
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Row>
@@ -108,7 +132,7 @@ const MoviesPage = () => {
           <Col lg={1} xs={1}></Col>
           <Col lg={8} xs={12}>
             <Row>
-              {data.results?.map((movie, index) => (
+              {sortedResults?.map((movie, index) => (
                 <Col key={index} lg={4} xs={12}>
                   <MovieCard movie={movie} />
                 </Col>
