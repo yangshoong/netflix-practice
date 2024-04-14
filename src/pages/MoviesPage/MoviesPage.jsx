@@ -27,28 +27,6 @@ const MoviesPage = () => {
     setPage(selected + 1);
   };
 
-  const genres = [
-    "SF",
-    "TV Movie",
-    "Family",
-    "Horror",
-    "Documentary",
-    "Drama",
-    "Romance",
-    "Adventure",
-    "Mystery",
-    "Crime",
-    "Western",
-    "Thriller",
-    "Animation",
-    "Action",
-    "History",
-    "Music",
-    "War",
-    "Comedy",
-    "Fantasy",
-  ];
-
   const genreIds = {
     28: "Action",
     12: "Adventure",
@@ -76,18 +54,21 @@ const MoviesPage = () => {
     setSortBy(sortOption);
   };
 
-  const sortedResults = data.results?.sort((a, b) => {
-    switch (sortBy) {
-      case "popularity":
-        return b.popularity - a.popularity;
-      case "voteAverage":
-        return b.vote_average - a.vote_average;
-      case "releaseDate":
-        return new Date(b.release_date) - new Date(a.release_date);
-      default:
-        return 0;
-    }
-  });
+  const sortedResults =
+    data && data.results
+      ? data.results.sort((a, b) => {
+          switch (sortBy) {
+            case "popularity":
+              return b.popularity - a.popularity;
+            case "voteAverage":
+              return b.vote_average - a.vote_average;
+            case "releaseDate":
+              return new Date(b.release_date) - new Date(a.release_date);
+            default:
+              return 0;
+          }
+        })
+      : [];
 
   const [selectedGenres, setSelectedGenres] = useState([]);
   const handleGenreClick = (genreId) => {
@@ -111,6 +92,10 @@ const MoviesPage = () => {
 
   if (isError) {
     return <Alert variant="danger">Error: {error.message}</Alert>;
+  }
+
+  if (!data) {
+    return null;
   }
 
   return (
@@ -150,7 +135,7 @@ const MoviesPage = () => {
                         pill
                         bg={
                           selectedGenres.includes(Number(id))
-                            ? "primary"
+                            ? "secondary"
                             : "light"
                         }
                         text={
@@ -193,7 +178,7 @@ const MoviesPage = () => {
               onPageChange={handlePageClick}
               pageRangeDisplayed={3}
               marginPagesDisplayed={2}
-              pageCount={data.total_pages} //전체 페이지가 몇개인지
+              pageCount={data?.total_pages} //전체 페이지가 몇개인지
               previousLabel="< previous"
               pageClassName="page-item"
               pageLinkClassName="page-link"

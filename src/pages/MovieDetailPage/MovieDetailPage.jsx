@@ -15,7 +15,6 @@ import MovieReviewsSlide from "./MovieReviewsSlide/MovieReviewsSlide";
 import MovieTrailerModal from "./MovieTrailerModal/MovieTrailerModal";
 
 const MovieDetailPage = () => {
-  // useMovieGenreQuery를 실행시켜서 받은 data를 genreData라는 이름의 변수에 담아 사용한다.
 
   const { id } = useParams();
   console.log("id", id);
@@ -88,7 +87,7 @@ const MovieDetailPage = () => {
           </Col>
         </Row>
         <Tabs
-          defaultActiveKey="profile"
+          defaultActiveKey="Reviews"
           id="uncontrolled-tab-example"
           className="mb-3"
         >

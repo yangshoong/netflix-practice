@@ -6,10 +6,14 @@ const fetchSearchMovie=({ keyword, page }) => {
 
 }
 
-export const useSearchMovieQuery = ({ keyword , page}) => {
+export const useSearchMovieQuery = ({ keyword, page }) => {
   return useQuery({
-    queryKey: ['movie-search', {keyword, page}],
+    queryKey: ['movie-search', { keyword, page }],
     queryFn: () => fetchSearchMovie({ keyword, page }),
-    select:(result)=>result.data,
-  })
-}
+    select: (result) => result.data,
+    onError: (error) => {
+      // Handle error appropriately here
+      console.error("Error fetching movie data:", error);
+    }
+  });
+};

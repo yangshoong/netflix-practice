@@ -10,9 +10,9 @@ import { useParams } from "react-router-dom";
 
 const MovieTrailerModal = ({ show, handleClose }) => {
   const { id } = useParams();
-  const { data: videos, isLoading, isError, error } = useMovieVideosQuery({ id });
+  const { data: videos} = useMovieVideosQuery({ id });
 
-  const videoId = videos?.results?.[0]?.key; // 첫 번째 트레일러 비디오의 키를 가져옵니다.
+  const videoId = videos?.results?.[0]?.key;
 
   const opts = {
     height: "390",
@@ -21,21 +21,6 @@ const MovieTrailerModal = ({ show, handleClose }) => {
       autoplay: 1,
     },
   };
-
-  if (isLoading) {
-    return (
-      <div>
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-        <h1>Loading...</h1>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return <Alert variant="danger">Error: {error.message}</Alert>;
-  }
 
   return (
     <Modal
