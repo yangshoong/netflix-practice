@@ -18,15 +18,14 @@ const MovieDetailPage = () => {
 
   const { id } = useParams();
   console.log("id", id);
-  const { data, isLoading, isError, error } = useMovieDetailsQuery({ id });
+  const { data = {}, isLoading, isError, error } = useMovieDetailsQuery({ id });
   console.log("detail", data);
 
   const defaultPosterUrl = "https://via.placeholder.com/600x900?text=No+Poster";
-  const posterUrl = data
-    ? data.poster_path
-      ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${data.poster_path}`
-      : defaultPosterUrl
-    : defaultPosterUrl;
+  const posterUrl = data?.poster_path
+  ? `https://image.tmdb.org/t/p/w600_and_h900_bestv2${data.poster_path}`
+  : defaultPosterUrl;
+
 
     const [show, setShow] = useState(false);
 

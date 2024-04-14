@@ -7,10 +7,9 @@ import { useMovieVideosQuery } from "../../../hooks/useMovieVideos";
 import YouTube from "react-youtube";
 import { useParams } from "react-router-dom";
 
-
 const MovieTrailerModal = ({ show, handleClose }) => {
   const { id } = useParams();
-  const { data: videos} = useMovieVideosQuery({ id });
+  const { data: videos, isLoading, isError } = useMovieVideosQuery({ id });
 
   const videoId = videos?.results?.[0]?.key;
 
@@ -21,6 +20,12 @@ const MovieTrailerModal = ({ show, handleClose }) => {
       autoplay: 1,
     },
   };
+
+  if (isLoading) return <Spinner animation="border" />;
+  if (isError)
+    return (
+      <Alert variant="danger">Error: Failed to load trailer information.</Alert>
+    );
 
   return (
     <Modal
@@ -35,7 +40,9 @@ const MovieTrailerModal = ({ show, handleClose }) => {
       </Modal.Header>
       <Modal.Body className="d-flex justify-content-center">
         {videoId ? (
-          <YouTube videoId={videoId} opts={opts} />
+          <div className="youtube-container">
+            <YouTube videoId={videoId} opts={opts} />
+          </div>
         ) : (
           <div>No trailer available</div>
         )}
@@ -43,6 +50,5 @@ const MovieTrailerModal = ({ show, handleClose }) => {
     </Modal>
   );
 };
-
 
 export default MovieTrailerModal;
