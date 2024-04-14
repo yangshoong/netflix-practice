@@ -49,6 +49,28 @@ const MoviesPage = () => {
     "Fantasy",
   ];
 
+  const genreIds = {
+    28: "Action",
+    12: "Adventure",
+    16: "Animation",
+    35: "Comedy",
+    80: "Crime",
+    99: "Documentary",
+    18: "Drama",
+    10751: "Family",
+    14: "Fantasy",
+    36: "History",
+    27: "Horror",
+    10402: "Music",
+    9648: "Mystery",
+    10749: "Romance",
+    878: "Science Fiction",
+    10770: "TV Movie",
+    53: "Thriller",
+    10752: "War",
+    37: "Western",
+  };
+
   const [sortBy, setSortBy] = useState("popularity");
   const handleSort = (sortOption) => {
     setSortBy(sortOption);
@@ -66,6 +88,15 @@ const MoviesPage = () => {
         return 0;
     }
   });
+
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const handleGenreClick = (genreId) => {
+    if (selectedGenres.includes(genreId)) {
+      setSelectedGenres(selectedGenres.filter((id) => id !== genreId));
+    } else {
+      setSelectedGenres([...selectedGenres, genreId]);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -113,15 +144,22 @@ const MoviesPage = () => {
               <Col lg={12} xs={12}>
                 <h5>Genres</h5>
                 <Row>
-                  {genres.map((genre, index) => (
-                    <Col key={index} className="mb-3">
+                  {Object.entries(genreIds).map(([id, name]) => (
+                    <Col key={id} className="mb-3">
                       <Badge
                         pill
-                        bg="light"
-                        text="dark"
+                        bg={
+                          selectedGenres.includes(Number(id))
+                            ? "primary"
+                            : "light"
+                        }
+                        text={
+                          selectedGenres.includes(Number(id)) ? "white" : "dark"
+                        }
                         className="genre-badge"
+                        onClick={() => handleGenreClick(Number(id))}
                       >
-                        {genre}
+                        {name}
                       </Badge>
                     </Col>
                   ))}
@@ -132,11 +170,23 @@ const MoviesPage = () => {
           <Col lg={1} xs={1}></Col>
           <Col lg={8} xs={12}>
             <Row>
-              {sortedResults?.map((movie, index) => (
-                <Col key={index} lg={4} xs={12}>
-                  <MovieCard movie={movie} />
-                </Col>
-              ))}
+              {selectedGenres.length > 0
+                ? sortedResults
+                    ?.filter((movie) =>
+                      selectedGenres.some((genreId) =>
+                        movie.genre_ids.includes(genreId)
+                      )
+                    )
+                    .map((movie, index) => (
+                      <Col key={index} lg={4} xs={12}>
+                        <MovieCard movie={movie} />
+                      </Col>
+                    ))
+                : sortedResults?.map((movie, index) => (
+                    <Col key={index} lg={4} xs={12}>
+                      <MovieCard movie={movie} />
+                    </Col>
+                  ))}
             </Row>
             <ReactPaginate
               nextLabel="next >"
