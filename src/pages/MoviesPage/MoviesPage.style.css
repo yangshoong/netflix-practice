@@ -55,37 +55,38 @@
   /* Font color to white */
 }
 
-.page-link {
-  color: #fff;
-  /* Set the font color to white */
-  background-color: #000;
-  /* Set the background color to black */
-  border: 1px solid #000;
-  /* Set the border color to black */
-  /* The rest of your existing .page-link styles */
+.previous,
+.next,
+.page-item .page-link {
+  color: #fff !important;
+  background-color: #000 !important;
+  border: 1px solid #000 !important;
 }
 
+/* 활성화된 페이지네이션 링크의 스타일 */
 .page-item.active .page-link {
-  background-color: #007bff;
-  /* Active item background color */
-  color: #fff;
-  /* Active item text color */
-  border-color: #007bff;
-  /* Active item border color */
-}
-
-/* Add this if you want to change the hover effect as well */
-.page-link:hover {
   background-color: #333;
-  /* Darker background on hover */
+  /* 활성화된 링크의 배경 색상을 어두운 회색으로 설정 */
+  color: #fff;
+  /* 활성화된 링크의 글자 색상을 흰색으로 설정 */
   border-color: #333;
-  /* Darker border on hover */
+  /* 활성화된 링크의 테두리 색상을 어두운 회색으로 설정 */
 }
 
-/* Ensure the page numbers don't get too cramped on smaller screens */
+/* 호버 효과를 변경하려면 이 부분을 추가하세요 */
+.previous:hover,
+.next:hover,
+.page-item .page-link:hover {
+  background-color: #333;
+  /* 호버 시 배경 색상을 어두운 회색으로 설정 */
+  border-color: #333;
+  /* 호버 시 테두리 색상을 어두운 회색으로 설정 */
+}
+
+/* 화면 크기가 작아졌을 때 페이지 번호가 너무 촘촘해지지 않도록 조정 */
 @media (max-width: 768px) {
   .page-link {
     padding: 0.5rem;
-    /* Adjust padding for smaller screens */
+    /* 작은 화면에서 패딩 조정 */
   }
 }
