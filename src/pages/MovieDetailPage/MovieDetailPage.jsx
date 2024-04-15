@@ -86,7 +86,7 @@ const MovieDetailPage = () => {
           </Col>
         </Row>
         <Tabs
-          defaultActiveKey="Reviews"
+          defaultActiveKey="Recommended Movies"
           id="uncontrolled-tab-example"
           className="mb-3"
         >
