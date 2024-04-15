@@ -90,11 +90,11 @@ const MovieDetailPage = () => {
           id="uncontrolled-tab-example"
           className="mb-3"
         >
-          <Tab eventKey="Reviews" title="Reviews">
-            <MovieReviewsSlide />
-          </Tab>
           <Tab eventKey="Recommended Movies" title="Recommended Movies">
             <RecommendedMovieSlide />
+          </Tab>
+          <Tab eventKey="Reviews" title="Reviews">
+            <MovieReviewsSlide />
           </Tab>
         </Tabs>
       </Container>
